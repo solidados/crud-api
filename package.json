@@ -1,0 +1,26 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "implementing simple CRUD API using in-memory database underneath",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solidados/crud-api.git"
+  },
+  "keywords": [
+    "CRUD",
+    "API",
+    "Node.js",
+    "Node",
+    "Typescript"
+  ],
+  "author": "solidados",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/solidados/crud-api/issues"
+  },
+  "homepage": "https://github.com/solidados/crud-api#readme"
+}
