@@ -1,6 +1,7 @@
 # Auto generated files and folders
 .idea
 .DS_Store
+package-lock.json
 
 # Logs
 logs
