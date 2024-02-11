@@ -1,4 +1,5 @@
 import Router from '../../framework/Router';
+import { CustomServerResponse } from '../../framework/Middleware';
 
 const { END_POINT } = process.env;
 
@@ -26,18 +27,12 @@ const users: UserType[] = [
   },
 ];
 
-router.get(END_POINT as string, (req, res): void => {
-  res.writeHead(200, {
-    'Content-Type': 'application/json',
-  });
-  res.end(JSON.stringify(users));
+router.get(END_POINT as string, (_req, res: CustomServerResponse): void => {
+  res.send(users);
 });
 
-router.post(END_POINT as string, (req, res): void => {
-  res.writeHead(200, {
-    'Content-Type': 'application/json',
-  });
-  res.end(JSON.stringify(users));
+router.post(END_POINT as string, (_req, res: CustomServerResponse): void => {
+  res.send(users);
 });
 
 export default router;
