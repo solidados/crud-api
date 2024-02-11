@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
+    "module": "ESNext",
+    "target": "ESNext",
+    "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
       "ESNext"
     ],
-    "module": "CommonJS",
     "moduleResolution": "Node",
     "noImplicitAny": true,
     "outDir": "./dist/",
@@ -14,8 +16,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true,
-    "target": "es5"
+    "strict": true
   },
   "ts-node": {
     "moduleTypes": {
