@@ -1,7 +1,8 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { IncomingMessage } from 'http';
+import { CustomServerResponse } from './Middleware';
 
 class Router {
-  public readonly endpoints: Record<string, Record<string, (req: IncomingMessage, res: ServerResponse) => void>>;
+  public readonly endpoints: Record<string, Record<string, (req: IncomingMessage, res: CustomServerResponse) => void>>;
 
   constructor() {
     this.endpoints = {};
@@ -10,7 +11,7 @@ class Router {
   public request(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     path: string,
-    handler: (req: IncomingMessage, res: ServerResponse) => void,
+    handler: (req: IncomingMessage, res: CustomServerResponse) => void,
   ): void {
     if (!this.endpoints[path]) {
       this.endpoints[path] = {};
@@ -25,19 +26,19 @@ class Router {
     endpoint[method] = handler;
   }
 
-  public get(path: string, handler: (req: IncomingMessage, res: ServerResponse) => void): void {
+  public get(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
     this.request('GET', path, handler);
   }
 
-  public post(path: string, handler: (req: IncomingMessage, res: ServerResponse) => void): void {
+  public post(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
     this.request('POST', path, handler);
   }
 
-  public put(path: string, handler: (req: IncomingMessage, res: ServerResponse) => void): void {
+  public put(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
     this.request('PUT', path, handler);
   }
 
-  public delete(path: string, handler: (req: IncomingMessage, res: ServerResponse) => void): void {
+  public delete(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
     this.request('DELETE', path, handler);
   }
 }
