@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
 export type UserType = {
-  id: number;
+  id: string;
   username: string;
   age: number;
   hobbies: string[];
