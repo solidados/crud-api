@@ -1,6 +1,6 @@
 import Router from '../../framework/Router';
 import { CustomServerResponse } from '../../framework/Middleware';
-import { IncomingMessageWithBody, UserType } from '../../framework/types/types';
+import { IncomingMessageWithBody, PostRequestType, UserType } from '../../framework/types/types';
 
 const { END_POINT } = process.env;
 
@@ -25,7 +25,7 @@ router.get(END_POINT as string, (req, res: CustomServerResponse): void => {
   res.send(users);
 });
 
-router.post(END_POINT as string, (req: IncomingMessageWithBody, res: CustomServerResponse): void => {
+router.post(END_POINT as string, (req: IncomingMessageWithBody & PostRequestType, res: CustomServerResponse): void => {
   const user = req.body;
   users.push(user);
   res.send(users);

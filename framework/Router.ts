@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http';
 import { CustomServerResponse } from './Middleware';
-import { IncomingMessageWithBody } from './types/types';
+import { IncomingMessageWithBody, PostRequestType } from './types/types';
 
 class Router {
   public readonly endpoints: Record<
@@ -34,7 +34,10 @@ class Router {
     this.request('GET', path, handler);
   }
 
-  public post(path: string, handler: (req: IncomingMessageWithBody, res: CustomServerResponse) => void): void {
+  public post(
+    path: string,
+    handler: (req: IncomingMessageWithBody & PostRequestType, res: CustomServerResponse) => void,
+  ): void {
     this.request('POST', path, handler);
   }
 

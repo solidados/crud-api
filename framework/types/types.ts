@@ -7,6 +7,10 @@ export type UserType = {
   hobbies: string[];
 };
 
+export type PostRequestType = {
+  body: UserType;
+};
+
 export interface IncomingMessageWithBody extends IncomingMessage {
   body: UserType;
 }

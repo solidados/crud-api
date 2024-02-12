@@ -1,7 +1,7 @@
 import http, { IncomingMessage, ServerResponse } from 'http';
 import EventEmitter from 'events';
 import Router from './Router';
-import { IncomingMessageWithBody, MiddlewareType } from './types/types';
+import { IncomingMessageWithBody, MiddlewareType, PostRequestType } from './types/types';
 import { CustomServerResponse } from './Middleware';
 
 class Application {
@@ -52,15 +52,27 @@ class Application {
 
   private createServer(): http.Server {
     return http.createServer((req: IncomingMessage, res: ServerResponse): void => {
-      const emitted: boolean = this.emitter.emit(
-        Application.getRouteMask(req.url as string, req.method as string),
-        req,
-        res,
-      );
+      const routeMask = Application.getRouteMask(req.url as string, req.method as string);
 
-      if (!emitted) {
-        res.statusCode = 404;
-        res.end('404 Not Found');
+      if (req.method === 'POST') {
+        let body = '';
+
+        req.on('data', (chunk: string): void => {
+          body += chunk;
+        });
+
+        req.on('end', (): void => {
+          try {
+            const requestBody: PostRequestType = JSON.parse(body) as PostRequestType;
+            this.emitter.emit(routeMask, { ...req, body: requestBody }, res);
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+            res.statusCode = 400;
+            res.end('400 Bad Request');
+          }
+        });
+      } else {
+        this.emitter.emit(routeMask, req, res);
       }
     });
   }
