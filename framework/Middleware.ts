@@ -1,10 +1,11 @@
-import { IncomingMessage, ServerResponse } from 'http';
+import { ServerResponse } from 'http';
+import { IncomingMessageWithBody } from './types/types';
 
 export interface CustomServerResponse extends ServerResponse {
   send: (data: unknown) => void;
 }
 
-const Middleware = (_req: IncomingMessage, res: CustomServerResponse): void => {
+const Middleware = (req: IncomingMessageWithBody, res: CustomServerResponse): void => {
   res.writeHead(200, {
     'Content-Type': 'application/json',
   });

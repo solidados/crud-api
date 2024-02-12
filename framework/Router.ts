@@ -1,8 +1,12 @@
 import { IncomingMessage } from 'http';
 import { CustomServerResponse } from './Middleware';
+import { IncomingMessageWithBody } from './types/types';
 
 class Router {
-  public readonly endpoints: Record<string, Record<string, (req: IncomingMessage, res: CustomServerResponse) => void>>;
+  public readonly endpoints: Record<
+    string,
+    Record<string, (req: IncomingMessageWithBody, res: CustomServerResponse) => void>
+  >;
 
   constructor() {
     this.endpoints = {};
@@ -11,7 +15,7 @@ class Router {
   public request(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     path: string,
-    handler: (req: IncomingMessage, res: CustomServerResponse) => void,
+    handler: (req: IncomingMessageWithBody, res: CustomServerResponse) => void,
   ): void {
     if (!this.endpoints[path]) {
       this.endpoints[path] = {};
@@ -30,11 +34,11 @@ class Router {
     this.request('GET', path, handler);
   }
 
-  public post(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
+  public post(path: string, handler: (req: IncomingMessageWithBody, res: CustomServerResponse) => void): void {
     this.request('POST', path, handler);
   }
 
-  public put(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
+  public put(path: string, handler: (req: IncomingMessageWithBody, res: CustomServerResponse) => void): void {
     this.request('PUT', path, handler);
   }
 

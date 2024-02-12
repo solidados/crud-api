@@ -1,7 +1,7 @@
 import http, { IncomingMessage, ServerResponse } from 'http';
 import EventEmitter from 'events';
 import Router from './Router';
-import { MiddlewareType } from './types/types';
+import { IncomingMessageWithBody, MiddlewareType } from './types/types';
 import { CustomServerResponse } from './Middleware';
 
 class Application {
@@ -40,7 +40,7 @@ class Application {
       Object.keys(endpoint).forEach((method: string): void => {
         this.emitter.on(
           Application.getRouteMask(path, method),
-          (req: IncomingMessage, res: CustomServerResponse): void => {
+          (req: IncomingMessageWithBody, res: CustomServerResponse): void => {
             const handler = endpoint[method];
             this.middlewares.forEach((middleware: MiddlewareType) => middleware(req, res));
             handler(req, res);
