@@ -1,5 +1,5 @@
 import { IncomingMessage } from 'http';
-import { CustomServerResponse } from './Middleware';
+import { CustomServerResponse } from './jsonParser';
 import { IncomingMessageWithBody, PostRequestType } from './types/types';
 
 class Router {

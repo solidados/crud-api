@@ -2,7 +2,7 @@ import http, { IncomingMessage, ServerResponse } from 'http';
 import EventEmitter from 'events';
 import Router from './Router';
 import { IncomingMessageWithBody, MiddlewareType, PostRequestType } from './types/types';
-import { CustomServerResponse } from './Middleware';
+import { CustomServerResponse } from './jsonParser';
 
 class Application {
   private readonly emitter: EventEmitter;

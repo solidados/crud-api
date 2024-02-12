@@ -1,8 +1,11 @@
 import 'dotenv/config';
 import Application from '../framework/Application';
+
 import UserRoutes from './users/user-routes';
+
 import { MiddlewareType } from '../framework/types/types';
-import Middleware from '../framework/Middleware';
+import JsonParserMiddleware from '../framework/jsonParser';
+import urlParserMiddleware from '../framework/urlParser';
 
 const { PORT } = process.env;
 
@@ -13,7 +16,8 @@ if (!PORT) {
 
 const app: Application = new Application();
 
-app.use(Middleware as MiddlewareType);
+app.use(JsonParserMiddleware as MiddlewareType);
+app.use(urlParserMiddleware as MiddlewareType);
 
 app.addRouter(UserRoutes);
 

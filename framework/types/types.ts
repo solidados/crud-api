@@ -15,4 +15,4 @@ export interface IncomingMessageWithBody extends IncomingMessage {
   body: UserType;
 }
 
-export type MiddlewareType = (req: IncomingMessageWithBody, res: ServerResponse) => void;
+export type MiddlewareType<T = ServerResponse> = (req: IncomingMessageWithBody, res: T) => void;

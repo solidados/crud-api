@@ -1,5 +1,5 @@
 import Router from '../../framework/Router';
-import { CustomServerResponse } from '../../framework/Middleware';
+import { CustomServerResponse } from '../../framework/jsonParser';
 import { IncomingMessageWithBody, PostRequestType, UserType } from '../../framework/types/types';
 
 const { END_POINT } = process.env;
