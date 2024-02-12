@@ -26,6 +26,7 @@ $ npm install
 ---
 
 ```bash
+# Build mode
 $ npm run build
 ```
 
@@ -33,12 +34,12 @@ $ npm run build
 
 ```bash
 # Development mode
-$ npm run dev
+$ npm run start
 ```
 
 ```bash
 # Production mode
-$ npm run prod
+$ npm run start:prod
 ```
 
 ```bash

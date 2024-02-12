@@ -10,7 +10,8 @@
     "start:dev": "ts-node-dev src",
     "start:prod": "webpack && node dist",
     "lint": "eslint src",
-    "format": "prettier --write src"
+    "format": "prettier --write src",
+    "test": "test"
   },
   "repository": {
     "type": "git",
