@@ -7,7 +7,7 @@ import { MiddlewareType } from '../framework/types/types';
 import JsonParserMiddleware from '../framework/jsonParser';
 import urlParserMiddleware from '../framework/urlParser';
 
-const { PORT } = process.env;
+const { PORT, BASE_URL } = process.env;
 
 if (!PORT) {
   console.error('PORT is not defined in process.env.');
@@ -17,7 +17,7 @@ if (!PORT) {
 const app: Application = new Application();
 
 app.use(JsonParserMiddleware as MiddlewareType);
-app.use(urlParserMiddleware as MiddlewareType);
+app.use(urlParserMiddleware(BASE_URL as string));
 
 app.addRouter(UserRoutes);
 
