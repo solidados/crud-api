@@ -11,8 +11,11 @@ export type PostRequestType = {
   body: UserType;
 };
 
-export interface IncomingMessageWithBody extends IncomingMessage {
+export interface IncomingMessageExtended extends IncomingMessage {
   body: UserType;
+  params: {
+    [key: string]: string;
+  };
 }
 
-export type MiddlewareType<T = ServerResponse> = (req: IncomingMessageWithBody, res: T) => void;
+export type MiddlewareType<T = ServerResponse> = (req: IncomingMessageExtended, res: T) => void;

@@ -1,11 +1,10 @@
-import { IncomingMessage } from 'http';
 import { CustomServerResponse } from './jsonParser';
-import { IncomingMessageWithBody, PostRequestType } from './types/types';
+import { IncomingMessageExtended, PostRequestType } from './types/types';
 
 class Router {
   public readonly endpoints: Record<
     string,
-    Record<string, (req: IncomingMessageWithBody, res: CustomServerResponse) => void>
+    Record<string, (req: IncomingMessageExtended, res: CustomServerResponse) => void>
   >;
 
   constructor() {
@@ -15,7 +14,7 @@ class Router {
   public request(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     path: string,
-    handler: (req: IncomingMessageWithBody, res: CustomServerResponse) => void,
+    handler: (req: IncomingMessageExtended, res: CustomServerResponse) => void,
   ): void {
     if (!this.endpoints[path]) {
       this.endpoints[path] = {};
@@ -30,22 +29,22 @@ class Router {
     endpoint[method] = handler;
   }
 
-  public get(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
+  public get(path: string, handler: (req: IncomingMessageExtended, res: CustomServerResponse) => void): void {
     this.request('GET', path, handler);
   }
 
   public post(
     path: string,
-    handler: (req: IncomingMessageWithBody & PostRequestType, res: CustomServerResponse) => void,
+    handler: (req: IncomingMessageExtended & PostRequestType, res: CustomServerResponse) => void,
   ): void {
     this.request('POST', path, handler);
   }
 
-  public put(path: string, handler: (req: IncomingMessageWithBody, res: CustomServerResponse) => void): void {
+  public put(path: string, handler: (req: IncomingMessageExtended, res: CustomServerResponse) => void): void {
     this.request('PUT', path, handler);
   }
 
-  public delete(path: string, handler: (req: IncomingMessage, res: CustomServerResponse) => void): void {
+  public delete(path: string, handler: (req: IncomingMessageExtended, res: CustomServerResponse) => void): void {
     this.request('DELETE', path, handler);
   }
 }
